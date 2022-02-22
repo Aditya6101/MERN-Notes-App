@@ -10,7 +10,6 @@
   "author": "Aditya Kamble",
   "license": "ISC",
   "dependencies": {
-    "chalk": "^5.0.0",
     "dotenv": "^16.0.0",
     "express": "^4.17.3",
     "express-async-handler": "^1.2.0",
