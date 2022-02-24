@@ -1,12 +1,13 @@
 const asyncHandler = require('express-async-handler');
 
 const Note = require('../models/noteModel');
+const User = require('../models/userModel');
 
 // @desc    Get Notes
 // @route   GET /api/notes
 // @access  Private
 const getNotes = asyncHandler(async (req, res) => {
-  const notes = await Note.find();
+  const notes = await Note.find({ user: req.user.id });
 
   res.status(200).send(notes);
 });
@@ -25,6 +26,7 @@ const createNote = asyncHandler(async (req, res) => {
     title,
     desc,
     text,
+    user: req.user.id,
   });
 
   res.status(201).send(note);
@@ -40,6 +42,21 @@ const updateNote = asyncHandler(async (req, res) => {
     res.status(400);
     throw new Error('Note not found');
   }
+
+  const user = await User.findById(req.user.id);
+
+  // Check for user
+  if (!user) {
+    res.status(401);
+    throw new Error('User Not Found');
+  }
+
+  // Make sure the logged in user matches notes user
+  if (note.user.toString() !== req.user.id) {
+    res.status(401);
+    throw new Error('User Not Authorized');
+  }
+
   const updatedNote = await Note.findByIdAndUpdate(req.params.id, req.body, {
     new: true,
   });
@@ -57,6 +74,20 @@ const deleteNote = asyncHandler(async (req, res) => {
     res.status(400);
     throw new Error('Note not found');
   }
+  const user = await User.findById(req.user.id);
+
+  // Check for user
+  if (!user) {
+    res.status(401);
+    throw new Error('User Not Found');
+  }
+
+  // Make sure the logged in user matches notes user
+  if (note.user.toString() !== req.user.id) {
+    res.status(401);
+    throw new Error('User Not Authorized');
+  }
+
   await note.remove();
 
   res.status(200).send({ id: req.params.id });
