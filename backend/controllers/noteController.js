@@ -43,10 +43,8 @@ const updateNote = asyncHandler(async (req, res) => {
     throw new Error('Note not found');
   }
 
-  const user = await User.findById(req.user.id);
-
   // Check for user
-  if (!user) {
+  if (!req.user) {
     res.status(401);
     throw new Error('User Not Found');
   }
@@ -74,10 +72,9 @@ const deleteNote = asyncHandler(async (req, res) => {
     res.status(400);
     throw new Error('Note not found');
   }
-  const user = await User.findById(req.user.id);
 
   // Check for user
-  if (!user) {
+  if (!req.user) {
     res.status(401);
     throw new Error('User Not Found');
   }
