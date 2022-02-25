@@ -1,4 +1,9 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import { useAppDispatch, useAppSelector } from '../app/hooks';
+import { useNavigate } from 'react-router-dom';
+import { register, reset } from '../features/auth/authSlice';
+
+import { toast } from 'react-toastify';
 import { UserIcon } from '@heroicons/react/solid';
 
 type formData = {
@@ -18,6 +23,13 @@ const Register: React.FC = () => {
 
   const { name, email, password, confirmPassword } = formData;
 
+  const navigate = useNavigate();
+  const dispatch = useAppDispatch();
+
+  const { user, isLoading, isError, isSuccess, message } = useAppSelector(
+    (state) => state.auth
+  );
+
   const handleChange: React.ChangeEventHandler<HTMLInputElement> = (e) => {
     setFormData((prev) => ({
       ...prev,
@@ -27,8 +39,30 @@ const Register: React.FC = () => {
 
   const handleSubmit: React.FormEventHandler = (e) => {
     e.preventDefault();
-    console.table({ name, email, password, confirmPassword });
+
+    if (confirmPassword !== password)
+      return toast.error('Passwords do not match!');
+    else {
+      const userData = {
+        name,
+        email,
+        password,
+      };
+      // todo resolve this
+      // @ts-ignore
+      dispatch(register(userData));
+    }
   };
+
+  useEffect(() => {
+    if (isError) toast.error(message);
+
+    if (isSuccess || user) navigate('/');
+
+    dispatch(reset());
+  }, [user, isError, isSuccess, message, navigate, dispatch]);
+
+  if (isLoading) return <pre>Loading...</pre>;
 
   return (
     <section>

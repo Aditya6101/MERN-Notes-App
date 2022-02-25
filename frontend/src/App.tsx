@@ -6,6 +6,9 @@ import Dashboard from './pages/Dashboard';
 import Register from './pages/Register';
 import Login from './pages/Login';
 
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
 const App: React.FC = () => {
   return (
     <>
@@ -17,6 +20,7 @@ const App: React.FC = () => {
           <Route path="/login" element={<Login />} />
         </Routes>
       </Router>
+      <ToastContainer />
     </>
   );
 };
