@@ -1,4 +1,9 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import { useAppDispatch, useAppSelector } from '../app/hooks';
+import { useNavigate } from 'react-router-dom';
+import { login, reset } from '../features/auth/authSlice';
+
+import { toast } from 'react-toastify';
 import { LoginIcon } from '@heroicons/react/solid';
 
 type formData = {
@@ -14,6 +19,13 @@ const Login: React.FC = () => {
 
   const { email, password } = formData;
 
+  const navigate = useNavigate();
+  const dispatch = useAppDispatch();
+
+  const { user, isLoading, isError, isSuccess, message } = useAppSelector(
+    (state) => state.auth
+  );
+
   const handleChange: React.ChangeEventHandler<HTMLInputElement> = (e) => {
     setFormData((prev) => ({
       ...prev,
@@ -23,8 +35,31 @@ const Login: React.FC = () => {
 
   const handleSubmit: React.FormEventHandler = (e) => {
     e.preventDefault();
-    console.table({ email, password });
+    if (email === '' || password === '')
+      return toast.error('Please fill in the form!');
+    else {
+      const userData = {
+        email,
+        password,
+      };
+      // todo resolve this
+      // @ts-ignore
+      dispatch(login(userData));
+    }
   };
+
+  useEffect(() => {
+    if (isError) toast.error(message);
+
+    if (isSuccess || user) {
+      toast.success('Registered successfully!');
+      navigate('/');
+    }
+
+    dispatch(reset());
+  }, [user, isError, isSuccess, message, navigate, dispatch]);
+
+  if (isLoading) return <pre>Loading...</pre>;
 
   return (
     <section>
