@@ -1,8 +1,22 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
-import { UserIcon, LoginIcon } from '@heroicons/react/solid';
+import { Link, useNavigate } from 'react-router-dom';
+import { useAppDispatch, useAppSelector } from '../app/hooks';
+import { logout, reset } from '../features/auth/authSlice';
+
+import { toast } from 'react-toastify';
+import { UserIcon, LoginIcon, LogoutIcon } from '@heroicons/react/solid';
 
 const Header: React.FC = () => {
+  const navigate = useNavigate();
+  const dispatch = useAppDispatch();
+  const { user } = useAppSelector((state) => state.auth);
+
+  const handleLogout = () => {
+    dispatch(logout());
+    dispatch(reset());
+    toast.success('Logged out successfully!');
+    navigate('/');
+  };
   return (
     <header>
       <div>
@@ -12,16 +26,27 @@ const Header: React.FC = () => {
       </div>
       <nav>
         <ul>
-          <li>
-            <Link to="/register">
-              <UserIcon style={{ height: '20px', width: '20px' }} /> Register
-            </Link>
-          </li>
-          <li>
-            <Link to="/login">
-              <LoginIcon style={{ height: '20px', width: '20px' }} /> Login
-            </Link>
-          </li>
+          {user ? (
+            <li>
+              <button onClick={handleLogout}>
+                <LogoutIcon style={{ height: '20px', width: '20px' }} /> Logout
+              </button>
+            </li>
+          ) : (
+            <>
+              <li>
+                <Link to="/register">
+                  <UserIcon style={{ height: '20px', width: '20px' }} />{' '}
+                  Register
+                </Link>
+              </li>
+              <li>
+                <Link to="/login">
+                  <LoginIcon style={{ height: '20px', width: '20px' }} /> Login
+                </Link>
+              </li>
+            </>
+          )}
         </ul>
       </nav>
     </header>
