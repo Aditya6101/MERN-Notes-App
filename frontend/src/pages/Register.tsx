@@ -1,10 +1,12 @@
 import React, { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from '../app/hooks';
 import { useNavigate } from 'react-router-dom';
 import { register, reset } from '../features/auth/authSlice';
 
+import SubmitButton from '../components/SubmitButton';
+
 import { toast } from 'react-toastify';
-import { UserIcon } from '@heroicons/react/solid';
 
 type formData = {
   name: string;
@@ -68,18 +70,29 @@ const Register: React.FC = () => {
   if (isLoading) return <pre>Loading...</pre>;
 
   return (
-    <section>
+    <section
+      className="pt-20 flex flex-col items-center
+    text-center"
+    >
       <div>
-        <h3>
-          <UserIcon style={{ height: '20px', width: '20px' }} /> Register
+        <h3 className="mb-4 text-2xl font-lato font-bold text-gray-800">
+          Register
         </h3>
-        <h4>Please create an account</h4>
+        <h4 className="mb-4 text-base font-lato font-bold text-gray-600">
+          Please create an account
+        </h4>
       </div>
 
       <form onSubmit={handleSubmit}>
-        <div className="form-control">
-          <label htmlFor="name">Name</label>
+        <div className="flex flex-col">
+          <label
+            className="mb-2 text-left text-base font-lato font-bold text-gray-800"
+            htmlFor="name"
+          >
+            Name
+          </label>
           <input
+            className="w-80 mb-4 p-1 border-2 border-gray-600 rounded-md font-lato text-sm font-medium  text-gray-800 placeholder:font-lato"
             type="text"
             value={name}
             name="name"
@@ -88,9 +101,15 @@ const Register: React.FC = () => {
             onChange={handleChange}
           />
         </div>
-        <div className="form-control">
-          <label htmlFor="email">Email</label>
+        <div className="flex flex-col">
+          <label
+            className="mb-2 text-left text-base font-lato font-bold text-gray-800"
+            htmlFor="email"
+          >
+            Email
+          </label>
           <input
+            className="w-80 mb-4 p-1 border-2 border-gray-600 rounded-md font-lato text-sm font-medium  text-gray-800 placeholder:font-lato"
             type="email"
             value={email}
             name="email"
@@ -99,9 +118,15 @@ const Register: React.FC = () => {
             onChange={handleChange}
           />
         </div>
-        <div className="form-control">
-          <label htmlFor="password">Password</label>
+        <div className="flex flex-col">
+          <label
+            className="mb-2 text-left text-base font-lato font-bold text-gray-800"
+            htmlFor="password"
+          >
+            Password
+          </label>
           <input
+            className="w-80 mb-4 p-1 border-2 border-gray-600 rounded-md font-lato text-sm font-medium  text-gray-800 placeholder:font-lato"
             type="password"
             value={password}
             name="password"
@@ -110,9 +135,15 @@ const Register: React.FC = () => {
             onChange={handleChange}
           />
         </div>
-        <div className="form-control">
-          <label htmlFor="c-password">Confirm Password</label>
+        <div className="flex flex-col">
+          <label
+            className="mb-2 text-left text-base font-lato font-bold text-gray-800"
+            htmlFor="c-password"
+          >
+            Confirm Password
+          </label>
           <input
+            className="w-80 mb-4 p-1 border-2 border-gray-600 rounded-md font-lato text-sm font-medium  text-gray-800 placeholder:font-lato"
             type="password"
             value={confirmPassword}
             name="confirmPassword"
@@ -121,7 +152,16 @@ const Register: React.FC = () => {
             onChange={handleChange}
           />
         </div>
-        <button type="submit">Register</button>
+        <p className="text-left text-sm font-lato font-bold text-gray-500">
+          Already have an account?{' '}
+          <Link
+            className="text-gray-700 underline hover:text-gray-900"
+            to="/login"
+          >
+            Login.
+          </Link>
+        </p>
+        <SubmitButton text="register" />
       </form>
     </section>
   );
