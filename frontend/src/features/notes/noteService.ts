@@ -28,9 +28,24 @@ const createNote = async (noteData: unknown, token: string) => {
   return response.data;
 };
 
+// TODO Update note feat
+
+// Delete a note
+const deleteNote = async (id: string, token: string) => {
+  const config = {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  };
+  const response = await axios.delete(`${API_URL}/${id}`, config);
+
+  return response.data;
+};
+
 const noteService = {
   getNotes,
   createNote,
+  deleteNote,
 };
 
 export default noteService;

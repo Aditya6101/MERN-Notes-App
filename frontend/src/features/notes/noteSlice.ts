@@ -49,6 +49,26 @@ export const createNote = createAsyncThunk(
   }
 );
 
+// Delete a note
+export const deleteNote = createAsyncThunk(
+  'notes/deleteNote',
+  async (id: string, thunkAPI) => {
+    try {
+      // todo fix this ignore
+      // @ts-ignore
+      const token = (thunkAPI.getState().auth.user.token as string) || '';
+      return await noteService.deleteNote(id, token);
+    } catch (err: any) {
+      // todo resolve any
+      const message =
+        (err.response && err.response.data && err.response.data.message) ||
+        err.message ||
+        err.toString();
+      return thunkAPI.rejectWithValue(message);
+    }
+  }
+);
+
 export const noteSlice = createSlice({
   name: 'notes',
   initialState,
@@ -80,6 +100,24 @@ export const noteSlice = createSlice({
         state.notes.push(action.payload);
       })
       .addCase(createNote.rejected, (state, action) => {
+        state.isLoading = false;
+        state.isError = true;
+        // todo fix as string
+        state.message = action.payload as string;
+      })
+      .addCase(deleteNote.pending, (state) => {
+        state.isLoading = true;
+      })
+      .addCase(deleteNote.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.isSuccess = true;
+        console.log(action.payload);
+
+        state.notes = state.notes.filter(
+          (note) => note._id !== action.payload.id
+        );
+      })
+      .addCase(deleteNote.rejected, (state, action) => {
         state.isLoading = false;
         state.isError = true;
         // todo fix as string

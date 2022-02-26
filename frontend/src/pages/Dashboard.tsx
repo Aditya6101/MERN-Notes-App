@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAppSelector, useAppDispatch } from '../app/hooks';
-import { getNotes, reset } from '../features/notes/noteSlice';
+import { getNotes, reset, deleteNote } from '../features/notes/noteSlice';
 
 import NoteForm from '../components/NoteForm';
 
@@ -43,7 +43,12 @@ const Dashboard: React.FC = () => {
       {notes.length > 0 ? (
         <div>
           {notes.map((note) => (
-            <pre key={note._id}>{JSON.stringify(note, null, 2)}</pre>
+            <div key={note._id}>
+              <pre>{note.title}</pre>
+              <button onClick={() => dispatch(deleteNote(note._id))}>
+                Delete
+              </button>
+            </div>
           ))}
         </div>
       ) : (
