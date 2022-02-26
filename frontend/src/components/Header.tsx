@@ -17,32 +17,43 @@ const Header: React.FC = () => {
     toast.success('Logged out successfully!');
     navigate('/');
   };
+
   return (
-    <header>
+    <header className="w-screen lg:px-12  mx-auto  py-2 px-8 border-b-2 flex items-center justify-between">
       <div>
         <h1>
-          <Link to="/">📒 Notes App</Link>
+          <Link to="/" className="text-xl font-bold font-lato">
+            📒 Notes App
+          </Link>
         </h1>
       </div>
       <nav>
-        <ul>
+        <ul className="flex items-center justify-between">
           {user ? (
             <li>
               <button onClick={handleLogout}>
-                <LogoutIcon style={{ height: '20px', width: '20px' }} /> Logout
+                <IconButton
+                  icon={<LogoutIcon className="w-6 h-6" />}
+                  text="register"
+                />
               </button>
             </li>
           ) : (
             <>
               <li>
                 <Link to="/register">
-                  <UserIcon style={{ height: '20px', width: '20px' }} />{' '}
-                  Register
+                  <IconButton
+                    icon={<UserIcon className="w-6 h-6" />}
+                    text="register"
+                  />
                 </Link>
               </li>
               <li>
                 <Link to="/login">
-                  <LoginIcon style={{ height: '20px', width: '20px' }} /> Login
+                  <IconButton
+                    icon={<LoginIcon className="w-6 h-6 rotate-180" />}
+                    text="login"
+                  />
                 </Link>
               </li>
             </>
@@ -54,3 +65,19 @@ const Header: React.FC = () => {
 };
 
 export default Header;
+
+type iconButtonProps = {
+  icon: React.ReactNode;
+  text: string;
+};
+
+const IconButton: React.FC<iconButtonProps> = ({ icon, text }) => {
+  return (
+    <button
+      className="ml-2  flex items-center justify-between capitalize
+    text-sm font-lato  font-semibold text-gray-900  hover:text-gray-700 focus:outline-none focus:shadow-outline"
+    >
+      {icon} {text}
+    </button>
+  );
+};
