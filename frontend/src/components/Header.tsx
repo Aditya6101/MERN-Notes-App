@@ -31,12 +31,13 @@ const Header: React.FC = () => {
         <ul className="flex items-center justify-between">
           {user ? (
             <li>
-              <button onClick={handleLogout}>
+              <>
                 <IconButton
+                  onClick={handleLogout}
                   icon={<LogoutIcon className="w-6 h-6" />}
-                  text="register"
+                  text="logout"
                 />
-              </button>
+              </>
             </li>
           ) : (
             <>
@@ -51,7 +52,7 @@ const Header: React.FC = () => {
               <li>
                 <Link to="/login">
                   <IconButton
-                    icon={<LoginIcon className="w-6 h-6 rotate-180" />}
+                    icon={<LoginIcon className="w-6 h-6" />}
                     text="login"
                   />
                 </Link>
@@ -69,11 +70,13 @@ export default Header;
 type iconButtonProps = {
   icon: React.ReactNode;
   text: string;
+  onClick?: () => void;
 };
 
-const IconButton: React.FC<iconButtonProps> = ({ icon, text }) => {
+const IconButton: React.FC<iconButtonProps> = ({ icon, text, onClick }) => {
   return (
     <button
+      onClick={onClick ? onClick : undefined}
       className="ml-2  flex items-center justify-between capitalize
     text-sm font-lato  font-semibold text-gray-900  hover:text-gray-700 focus:outline-none focus:shadow-outline"
     >

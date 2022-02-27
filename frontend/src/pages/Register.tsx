@@ -74,16 +74,14 @@ const Register: React.FC = () => {
       className="pt-20 flex flex-col items-center
     text-center"
     >
-      <div>
-        <h3 className="mb-4 text-2xl font-lato font-bold text-gray-800">
-          Register
-        </h3>
-        <h4 className="mb-4 text-base font-lato font-bold text-gray-600">
-          Please create an account
-        </h4>
-      </div>
+      <h3 className="mb-4 text-2xl font-lato font-bold text-gray-800">
+        Register
+      </h3>
+      <h4 className="mb-4 text-base font-lato font-bold text-gray-600">
+        Please create an account
+      </h4>
 
-      <form onSubmit={handleSubmit}>
+      <form className="w-80" onSubmit={handleSubmit}>
         <div className="flex flex-col">
           <label
             className="mb-2 text-left text-base font-lato font-bold text-gray-800"
@@ -92,7 +90,7 @@ const Register: React.FC = () => {
             Name
           </label>
           <input
-            className="w-80 mb-4 p-1 border-2 border-gray-600 rounded-md font-lato text-sm font-medium  text-gray-800 placeholder:font-lato"
+            className="mb-4 p-1 border-2 border-gray-600 rounded-md font-lato text-sm font-medium  text-gray-800 placeholder:font-lato"
             type="text"
             value={name}
             name="name"
@@ -109,7 +107,7 @@ const Register: React.FC = () => {
             Email
           </label>
           <input
-            className="w-80 mb-4 p-1 border-2 border-gray-600 rounded-md font-lato text-sm font-medium  text-gray-800 placeholder:font-lato"
+            className="mb-4 p-1 border-2 border-gray-600 rounded-md font-lato text-sm font-medium  text-gray-800 placeholder:font-lato"
             type="email"
             value={email}
             name="email"
@@ -126,7 +124,7 @@ const Register: React.FC = () => {
             Password
           </label>
           <input
-            className="w-80 mb-4 p-1 border-2 border-gray-600 rounded-md font-lato text-sm font-medium  text-gray-800 placeholder:font-lato"
+            className="mb-4 p-1 border-2 border-gray-600 rounded-md font-lato text-sm font-medium  text-gray-800 placeholder:font-lato"
             type="password"
             value={password}
             name="password"
@@ -143,7 +141,7 @@ const Register: React.FC = () => {
             Confirm Password
           </label>
           <input
-            className="w-80 mb-4 p-1 border-2 border-gray-600 rounded-md font-lato text-sm font-medium  text-gray-800 placeholder:font-lato"
+            className="mb-4 p-1 border-2 border-gray-600 rounded-md font-lato text-sm font-medium  text-gray-800 placeholder:font-lato"
             type="password"
             value={confirmPassword}
             name="confirmPassword"
