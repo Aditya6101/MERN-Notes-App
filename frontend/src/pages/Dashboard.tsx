@@ -4,6 +4,7 @@ import { useAppSelector, useAppDispatch } from '../app/hooks';
 import { getNotes, reset, deleteNote } from '../features/notes/noteSlice';
 
 import NoteForm from '../components/NoteForm';
+import Loader from '../components/Loader';
 
 import { toast } from 'react-toastify';
 
@@ -20,7 +21,7 @@ const Dashboard: React.FC = () => {
   );
 
   const handleClick = () => {
-    setBtnText(showAddNote ? 'Add Note' : 'Cancel');
+    setBtnText(showAddNote ? 'Add Note' : 'View Notes');
     setShowAddNote((prev) => !prev);
   };
 
@@ -40,13 +41,11 @@ const Dashboard: React.FC = () => {
     };
   }, [navigate, dispatch, user, isError, message]);
 
-  if (isLoading) {
-    return <pre>Loading...</pre>;
-  }
+  if (isLoading) return <Loader />;
 
   return (
     <section
-      className="pt-20 flex flex-col items-center
+      className="pt-8 flex flex-col items-center
     text-center"
     >
       <div>
@@ -75,7 +74,9 @@ const Dashboard: React.FC = () => {
           ))}
         </div>
       ) : (
-        <h3>No notes</h3>
+        <h3 className="mt-4 text-base font-lato font-bold text-gray-600">
+          No don't have any notes
+        </h3>
       )}
     </section>
   );
