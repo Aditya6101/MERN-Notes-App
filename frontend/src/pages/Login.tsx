@@ -5,6 +5,7 @@ import { useNavigate } from 'react-router-dom';
 import { login, reset } from '../features/auth/authSlice';
 
 import SubmitButton from '../components/SubmitButton';
+import Loader from '../components/Loader';
 
 import { toast } from 'react-toastify';
 
@@ -61,7 +62,7 @@ const Login: React.FC = () => {
     dispatch(reset());
   }, [user, isError, isSuccess, message, navigate, dispatch]);
 
-  if (isLoading) return <pre>Loading...</pre>;
+  if (isLoading) return <Loader />;
 
   return (
     <section
