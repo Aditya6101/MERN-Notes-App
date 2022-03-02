@@ -9,13 +9,8 @@ import Loader from '../components/Loader';
 
 import { toast } from 'react-toastify';
 
-type formData = {
-  email: string;
-  password: string;
-};
-
 const Login: React.FC = () => {
-  const [formData, setFormData] = useState<formData>({
+  const [formData, setFormData] = useState<userLogin>({
     email: '',
     password: '',
   });
@@ -45,8 +40,6 @@ const Login: React.FC = () => {
         email,
         password,
       };
-      // todo resolve this
-      // @ts-ignore
       dispatch(login(userData));
     }
   };
@@ -65,27 +58,24 @@ const Login: React.FC = () => {
   if (isLoading) return <Loader />;
 
   return (
-    <section
-      className="pt-20 flex flex-col items-center
-      text-center"
-    >
-      <h3 className="mb-4 text-2xl font-lato font-bold text-gray-800">
+    <section className="flex flex-col items-center pt-20 text-center">
+      <h3 className="mb-4 text-2xl font-bold text-gray-800 font-lato">
         Log In
       </h3>
-      <h4 className="mb-4 text-base font-lato font-bold text-gray-600">
+      <h4 className="mb-4 text-base font-bold text-gray-600 font-lato">
         Please login into your account
       </h4>
 
       <form className="w-80" onSubmit={handleSubmit}>
         <div className="flex flex-col">
           <label
-            className="mb-2 text-left text-base font-lato font-bold text-gray-800"
+            className="mb-2 text-base font-bold text-left text-gray-800 font-lato"
             htmlFor="email"
           >
             Email
           </label>
           <input
-            className="mb-4 p-1 border-2 border-gray-600 rounded-md font-lato text-sm font-medium  text-gray-800 placeholder:font-lato"
+            className="p-1 mb-4 text-sm font-medium text-gray-800 border-2 border-gray-600 rounded-md font-lato placeholder:font-lato"
             type="email"
             value={email}
             name="email"
@@ -96,14 +86,13 @@ const Login: React.FC = () => {
         </div>
         <div className="flex flex-col">
           <label
-            className="mb-2 text-left text-base font-lato font-bold text-gray-800"
+            className="mb-2 text-base font-bold text-left text-gray-800 font-lato"
             htmlFor="password"
           >
             Password
           </label>
           <input
-            className="mb-4 p-1 border-2 border-gray-600 rounded-md font-lato text-sm font-medium  text-gray-800
-            placeholder:font-lato"
+            className="p-1 mb-4 text-sm font-medium text-gray-800 border-2 border-gray-600 rounded-md font-lato placeholder:font-lato"
             type="password"
             value={password}
             name="password"
@@ -112,7 +101,7 @@ const Login: React.FC = () => {
             onChange={handleChange}
           />
         </div>
-        <p className="text-left text-sm font-lato font-bold text-gray-500">
+        <p className="text-sm font-bold text-left text-gray-500 font-lato">
           Don't Have an Account?{' '}
           <Link
             className="text-gray-700 underline hover:text-gray-900"

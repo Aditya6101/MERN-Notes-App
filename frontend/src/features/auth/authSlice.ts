@@ -1,7 +1,7 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import authService from './authService';
+
 // Get user from local storage
-// todo optimize this
 const user: string | null =
   JSON.parse(localStorage.getItem('user') as string) || null;
 
@@ -16,11 +16,10 @@ const initialState = {
 // Register user
 export const register = createAsyncThunk(
   'auth/register',
-  async (user, thunkAPI) => {
+  async (user: userResigter, thunkAPI) => {
     try {
       return await authService.register(user);
     } catch (err: any) {
-      // todo resolve any
       const message =
         (err.response && err.response.data && err.response.data.message) ||
         err.message ||
@@ -31,18 +30,20 @@ export const register = createAsyncThunk(
 );
 
 // Login user
-export const login = createAsyncThunk('auth/login', async (user, thunkAPI) => {
-  try {
-    return await authService.login(user);
-  } catch (err: any) {
-    // todo resolve any
-    const message =
-      (err.response && err.response.data && err.response.data.message) ||
-      err.message ||
-      err.toString();
-    return thunkAPI.rejectWithValue(message);
+export const login = createAsyncThunk(
+  'auth/login',
+  async (user: userLogin, thunkAPI) => {
+    try {
+      return await authService.login(user);
+    } catch (err: any) {
+      const message =
+        (err.response && err.response.data && err.response.data.message) ||
+        err.message ||
+        err.toString();
+      return thunkAPI.rejectWithValue(message);
+    }
   }
-});
+);
 
 // Logout User
 export const logout = createAsyncThunk(
@@ -74,7 +75,6 @@ export const authSlice = createSlice({
       .addCase(register.rejected, (state, action) => {
         state.isLoading = false;
         state.isError = true;
-        // todo fix as string
         state.message = action.payload as string;
         state.user = null;
       })
@@ -89,7 +89,6 @@ export const authSlice = createSlice({
       .addCase(login.rejected, (state, action) => {
         state.isLoading = false;
         state.isError = true;
-        // todo fix as string
         state.message = action.payload as string;
         state.user = null;
       })

@@ -51,8 +51,6 @@ const Register: React.FC = () => {
         email,
         password,
       };
-      // todo resolve this
-      // @ts-ignore
       dispatch(register(userData));
     }
   };
@@ -72,26 +70,25 @@ const Register: React.FC = () => {
 
   return (
     <section
-      className="pt-20 flex flex-col items-center
-    text-center"
+      className="flex flex-col items-center pt-20 text-center"
     >
-      <h3 className="mb-4 text-2xl font-lato font-bold text-gray-800">
+      <h3 className="mb-4 text-2xl font-bold text-gray-800 font-lato">
         Register
       </h3>
-      <h4 className="mb-4 text-base font-lato font-bold text-gray-600">
+      <h4 className="mb-4 text-base font-bold text-gray-600 font-lato">
         Please create an account
       </h4>
 
       <form className="w-80" onSubmit={handleSubmit}>
         <div className="flex flex-col">
           <label
-            className="mb-2 text-left text-base font-lato font-bold text-gray-800"
+            className="mb-2 text-base font-bold text-left text-gray-800 font-lato"
             htmlFor="name"
           >
             Name
           </label>
           <input
-            className="mb-4 p-1 border-2 border-gray-600 rounded-md font-lato text-sm font-medium  text-gray-800 placeholder:font-lato"
+            className="p-1 mb-4 text-sm font-medium text-gray-800 border-2 border-gray-600 rounded-md font-lato placeholder:font-lato"
             type="text"
             value={name}
             name="name"
@@ -102,13 +99,13 @@ const Register: React.FC = () => {
         </div>
         <div className="flex flex-col">
           <label
-            className="mb-2 text-left text-base font-lato font-bold text-gray-800"
+            className="mb-2 text-base font-bold text-left text-gray-800 font-lato"
             htmlFor="email"
           >
             Email
           </label>
           <input
-            className="mb-4 p-1 border-2 border-gray-600 rounded-md font-lato text-sm font-medium  text-gray-800 placeholder:font-lato"
+            className="p-1 mb-4 text-sm font-medium text-gray-800 border-2 border-gray-600 rounded-md font-lato placeholder:font-lato"
             type="email"
             value={email}
             name="email"
@@ -119,13 +116,13 @@ const Register: React.FC = () => {
         </div>
         <div className="flex flex-col">
           <label
-            className="mb-2 text-left text-base font-lato font-bold text-gray-800"
+            className="mb-2 text-base font-bold text-left text-gray-800 font-lato"
             htmlFor="password"
           >
             Password
           </label>
           <input
-            className="mb-4 p-1 border-2 border-gray-600 rounded-md font-lato text-sm font-medium  text-gray-800 placeholder:font-lato"
+            className="p-1 mb-4 text-sm font-medium text-gray-800 border-2 border-gray-600 rounded-md font-lato placeholder:font-lato"
             type="password"
             value={password}
             name="password"
@@ -136,13 +133,13 @@ const Register: React.FC = () => {
         </div>
         <div className="flex flex-col">
           <label
-            className="mb-2 text-left text-base font-lato font-bold text-gray-800"
+            className="mb-2 text-base font-bold text-left text-gray-800 font-lato"
             htmlFor="c-password"
           >
             Confirm Password
           </label>
           <input
-            className="mb-4 p-1 border-2 border-gray-600 rounded-md font-lato text-sm font-medium  text-gray-800 placeholder:font-lato"
+            className="p-1 mb-4 text-sm font-medium text-gray-800 border-2 border-gray-600 rounded-md font-lato placeholder:font-lato"
             type="password"
             value={confirmPassword}
             name="confirmPassword"
@@ -151,7 +148,7 @@ const Register: React.FC = () => {
             onChange={handleChange}
           />
         </div>
-        <p className="text-left text-sm font-lato font-bold text-gray-500">
+        <p className="text-sm font-bold text-left text-gray-500 font-lato">
           Already have an account?{' '}
           <Link
             className="text-gray-700 underline hover:text-gray-900"

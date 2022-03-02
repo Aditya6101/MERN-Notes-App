@@ -1,8 +1,16 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import noteService from './noteService';
 
-const initialState = {
-  notes: [] as any[], // todo fix this any[]
+type initialStateType = {
+  notes: Note[];
+  isSuccess: boolean;
+  isError: boolean;
+  isLoading: boolean;
+  message: string;
+};
+
+const initialState: initialStateType = {
+  notes: [] as Note[],
   isSuccess: false,
   isError: false,
   isLoading: false,
@@ -14,12 +22,10 @@ export const getNotes = createAsyncThunk(
   'notes/getNotes',
   async (_, thunkAPI) => {
     try {
-      // todo fix this ignore
       // @ts-ignore
       const token = (thunkAPI.getState().auth.user.token as string) || '';
       return await noteService.getNotes(token);
     } catch (err: any) {
-      // todo resolve any
       const message =
         (err.response && err.response.data && err.response.data.message) ||
         err.message ||
@@ -32,14 +38,12 @@ export const getNotes = createAsyncThunk(
 // Create a note
 export const createNote = createAsyncThunk(
   'notes/createNote',
-  async (formData, thunkAPI) => {
+  async (formData: NewNoteType, thunkAPI) => {
     try {
-      // todo fix this ignore
       // @ts-ignore
       const token = (thunkAPI.getState().auth.user.token as string) || '';
       return await noteService.createNote(formData, token);
     } catch (err: any) {
-      // todo resolve any
       const message =
         (err.response && err.response.data && err.response.data.message) ||
         err.message ||
@@ -54,12 +58,10 @@ export const deleteNote = createAsyncThunk(
   'notes/deleteNote',
   async (id: string, thunkAPI) => {
     try {
-      // todo fix this ignore
       // @ts-ignore
       const token = (thunkAPI.getState().auth.user.token as string) || '';
       return await noteService.deleteNote(id, token);
     } catch (err: any) {
-      // todo resolve any
       const message =
         (err.response && err.response.data && err.response.data.message) ||
         err.message ||
@@ -83,12 +85,11 @@ export const noteSlice = createSlice({
       .addCase(getNotes.fulfilled, (state, action) => {
         state.isLoading = false;
         state.isSuccess = true;
-        state.notes = action.payload;
+        state.notes = action.payload as Note[];
       })
       .addCase(getNotes.rejected, (state, action) => {
         state.isLoading = false;
         state.isError = true;
-        // todo fix as string
         state.message = action.payload as string;
       })
       .addCase(createNote.pending, (state) => {
@@ -97,12 +98,11 @@ export const noteSlice = createSlice({
       .addCase(createNote.fulfilled, (state, action) => {
         state.isLoading = false;
         state.isSuccess = true;
-        state.notes.push(action.payload);
+        state.notes.push(action.payload as Note);
       })
       .addCase(createNote.rejected, (state, action) => {
         state.isLoading = false;
         state.isError = true;
-        // todo fix as string
         state.message = action.payload as string;
       })
       .addCase(deleteNote.pending, (state) => {
@@ -111,16 +111,13 @@ export const noteSlice = createSlice({
       .addCase(deleteNote.fulfilled, (state, action) => {
         state.isLoading = false;
         state.isSuccess = true;
-        console.log(action.payload);
-
         state.notes = state.notes.filter(
-          (note) => note._id !== action.payload.id
+          (note) => note._id !== (action.payload.id as string)
         );
       })
       .addCase(deleteNote.rejected, (state, action) => {
         state.isLoading = false;
         state.isError = true;
-        // todo fix as string
         state.message = action.payload as string;
       });
   },

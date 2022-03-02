@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAppSelector, useAppDispatch } from '../app/hooks';
-import { getNotes, reset, deleteNote } from '../features/notes/noteSlice';
+import { getNotes, reset } from '../features/notes/noteSlice';
 
 import NoteForm from '../components/NoteForm';
 import Loader from '../components/Loader';
+import NoteList from '../components/NoteList';
 
 import { toast } from 'react-toastify';
 
@@ -30,6 +31,7 @@ const Dashboard: React.FC = () => {
       console.log(message);
       toast.error(message);
     }
+
     if (!user) {
       navigate('/login');
     }
@@ -44,16 +46,13 @@ const Dashboard: React.FC = () => {
   if (isLoading) return <Loader />;
 
   return (
-    <section
-      className="pt-8 flex flex-col items-center
-    text-center"
-    >
+    <section className="flex flex-col items-center pt-8 text-center">
       <div>
-        <h1 className="mb-4 text-2xl font-lato font-bold text-gray-800">
+        <h1 className="mb-4 text-2xl font-bold text-gray-800 font-lato">
           Welcome
         </h1>
         <button
-          className="w-full mt-4  py-1 bg-black font-lato font-semibold text-base text-white capitalize rounded-md hover:bg-gray-800"
+          className="w-full py-1 mt-4 text-base font-semibold text-white capitalize bg-black rounded-md font-lato hover:bg-gray-800"
           onClick={handleClick}
         >
           {btnText}
@@ -63,19 +62,10 @@ const Dashboard: React.FC = () => {
       {showAddNote ? (
         <NoteForm />
       ) : notes.length > 0 ? (
-        <div>
-          {notes.map((note) => (
-            <div key={note._id}>
-              <pre>{note.title}</pre>
-              <button onClick={() => dispatch(deleteNote(note._id))}>
-                Delete
-              </button>
-            </div>
-          ))}
-        </div>
+        <NoteList notes={notes} />
       ) : (
-        <h3 className="mt-4 text-base font-lato font-bold text-gray-600">
-          No don't have any notes
+        <h3 className="mt-4 text-base font-bold text-gray-600 font-lato">
+          You don't have any notes yet.
         </h3>
       )}
     </section>

@@ -3,8 +3,7 @@ import axios from 'axios';
 const API_URL = '/api/users';
 
 // Register User
-// todo resolve unknown
-const register = async (userData: unknown) => {
+const register = async (userData: userResigter) => {
   const response = await axios.post(`${API_URL}/register`, userData);
 
   if (response.data) {
@@ -14,8 +13,7 @@ const register = async (userData: unknown) => {
 };
 
 // Login User
-// todo resolve unknown
-const login = async (userData: unknown) => {
+const login = async (userData: userLogin) => {
   const response = await axios.post(`${API_URL}/login`, userData);
 
   if (response.data) {
