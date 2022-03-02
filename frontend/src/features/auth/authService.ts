@@ -3,7 +3,7 @@ import axios from 'axios';
 const API_URL = '/api/users';
 
 // Register User
-const register = async (userData: userResigter) => {
+const register = async (userData: userResigter): Promise<User | string> => {
   const response = await axios.post(`${API_URL}/register`, userData);
 
   if (response.data) {
@@ -13,7 +13,7 @@ const register = async (userData: userResigter) => {
 };
 
 // Login User
-const login = async (userData: userLogin) => {
+const login = async (userData: userLogin): Promise<User | string> => {
   const response = await axios.post(`${API_URL}/login`, userData);
 
   if (response.data) {

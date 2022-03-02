@@ -49,7 +49,7 @@ const Dashboard: React.FC = () => {
     <section className="flex flex-col items-center pt-8 text-center">
       <div>
         <h1 className="mb-4 text-2xl font-bold text-gray-800 font-lato">
-          Welcome
+          Welcome {user?.name}
         </h1>
         <button
           className="w-full py-1 mt-4 text-base font-semibold text-white capitalize bg-black rounded-md font-lato hover:bg-gray-800"

@@ -23,6 +23,11 @@ const NoteItem: React.FC<Props> = ({ note }) => {
     (state) => state.notes
   );
 
+  const handleDelete = (id: string) => {
+    dispatch(deleteNote(id));
+    toast.success('Note deleted!');
+  };
+
   useEffect(() => {
     if (isError) {
       console.log(message);
@@ -31,22 +36,25 @@ const NoteItem: React.FC<Props> = ({ note }) => {
   }, [dispatch, isError, message]);
 
   return (
-    <div className="w-60 max-w-xl m-4 p-2 bg-gray-100 text-left rounded-md cursor-pointer">
+    <div className="max-w-xl p-2 m-4 text-left bg-gray-100 rounded-md cursor-pointer w-60">
       {!isLoading ? (
         <>
-          <h3 className="mb-1 text-xl font-lato font-bold text-gray-800 truncate">
+          <h3 className="mb-1 text-xl font-bold text-gray-800 truncate font-lato">
             {note.title}
           </h3>
-          <h4 className="mb-1 text-base font-lato font-semibold text-gray-400 truncate">
+          <h4 className="mb-1 text-base font-semibold text-gray-400 truncate font-lato">
             {note.desc ? note.desc : 'No description'}
           </h4>
-          <div className="flex items-center justify-between">
-            <span className="text-base font-lato font-medium text-gray-600">
+          <div className="flex items-center justify-between mb-2">
+            <span className="text-base font-medium text-gray-600 font-lato">
               {getDate(note.updatedAt)}
             </span>
-            <button onClick={() => dispatch(deleteNote(note._id))}>
+            <button onClick={() => handleDelete(note._id)}>
               <TrashIcon className="w-4 h-4 text-gray-600 hover:text-gray-800" />
             </button>
+          </div>
+          <div className="mt-2 text-base font-semibold text-gray-700 font-lato">
+            {note.text}
           </div>
         </>
       ) : (

@@ -33,6 +33,7 @@ const NoteForm: React.FC = () => {
       return toast.warning('Please fill in the form!');
 
     dispatch(createNote(formData));
+    toast.success('Note created!');
   };
 
   return (

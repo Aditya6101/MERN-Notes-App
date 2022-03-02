@@ -43,8 +43,6 @@ const deleteNote = async (
   };
   const response = await axios.delete(`${API_URL}/${id}`, config);
 
-  console.log(response);
-
   return response.data;
 };
 
