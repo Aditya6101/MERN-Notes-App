@@ -9,7 +9,7 @@ https://aditya-mern-notes-app.herokuapp.com
 
 ## Tech Stack
 
-**Client:** React, Redux Toolkit, TailwindCSS
+**Client:** React + Typescript, Redux Toolkit, TailwindCSS
 
 **Server:** Node, Express, JWT Token
 
