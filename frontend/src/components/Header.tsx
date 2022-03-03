@@ -2,6 +2,7 @@ import React from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from '../app/hooks';
 import { logout, reset } from '../features/auth/authSlice';
+import IconButton from './IconButton';
 
 import { toast } from 'react-toastify';
 import { UserIcon, LoginIcon, LogoutIcon } from '@heroicons/react/solid';
@@ -19,7 +20,7 @@ const Header: React.FC = () => {
   };
 
   return (
-    <header className="w-screen lg:px-12  mx-auto  py-2 px-8 border-b-2 flex items-center justify-between">
+    <header className="flex items-center justify-between w-screen px-8 py-2 mx-auto border-b-2 lg:px-12">
       <div>
         <h1>
           <Link to="/" className="text-xl font-bold font-lato">
@@ -66,21 +67,3 @@ const Header: React.FC = () => {
 };
 
 export default Header;
-
-type iconButtonProps = {
-  icon: React.ReactNode;
-  text: string;
-  onClick?: () => void;
-};
-
-const IconButton: React.FC<iconButtonProps> = ({ icon, text, onClick }) => {
-  return (
-    <button
-      onClick={onClick ? onClick : undefined}
-      className="ml-2  flex items-center justify-between capitalize
-    text-sm font-lato  font-semibold text-gray-900  hover:text-gray-700 focus:outline-none focus:shadow-outline"
-    >
-      {icon} {text}
-    </button>
-  );
-};
