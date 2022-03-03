@@ -2,33 +2,6 @@
 
 A simple web application for taking short notes.
 
-
-## Live Site
-
-https://aditya-mern-notes-app.herokuapp.com
-
-
-## Tech Stack
-
-**Client:** React, Redux Toolkit, TailwindCSS
-
-**Server:** Node, Express, JWT Token
-
-**Database:** MongoDB with Mongoose
-
-
-## Features
-
-- Authentication using JWT tokens
-- Minimal UI
-- Mobile Friendly
-
-
-# MERN Notes App
-
-A simple web application for taking short notes.
-
-
 ## Live Site
 
 https://aditya-mern-notes-app.herokuapp.com
