@@ -3,7 +3,7 @@ import axios from 'axios';
 const API_URL = '/api/users';
 
 // Register User
-const register = async (userData: userResigter): Promise<User | string> => {
+const register = async (userData: userRegister): Promise<User | string> => {
   const response = await axios.post(`${API_URL}/register`, userData);
 
   if (response.data) {

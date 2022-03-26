@@ -16,7 +16,7 @@ const initialState = {
 // Register user
 export const register = createAsyncThunk(
   'auth/register',
-  async (user: userResigter, thunkAPI) => {
+  async (user: userRegister, thunkAPI) => {
     try {
       return await authService.register(user);
     } catch (err: any) {

@@ -5,16 +5,13 @@ type User = {
   token: string;
 };
 
-type userResigter = {
+type userRegister = {
   name: string;
   email: string;
   password: string;
 };
 
-type userLogin = {
-  email: string;
-  password: string;
-};
+type userLogin = Pick<userRegister, 'email' | 'password'>;
 
 type Note = {
   _id: string;
@@ -26,11 +23,7 @@ type Note = {
 };
 
 // Type for FormData of CreateForm component
-type NewNoteType = {
-  title: string;
-  desc: string;
-  text: string;
-};
+type NewNoteType = Pick<Note, 'title' | 'desc' | 'text'>;
 
 type deleteResponseType = {
   id: string;
