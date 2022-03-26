@@ -6,7 +6,11 @@ import SubmitButton from './SubmitButton';
 
 import { toast } from 'react-toastify';
 
-const NoteForm: React.FC = () => {
+type Props = {
+  showFormFunc: React.Dispatch<React.SetStateAction<boolean>>;
+};
+
+const NoteForm: React.FC<Props> = ({ showFormFunc }) => {
   const [formData, setFormData] = useState<NewNoteType>({
     title: '',
     desc: '',
@@ -28,9 +32,9 @@ const NoteForm: React.FC = () => {
 
   const handleSubmit: React.FormEventHandler = (e) => {
     e.preventDefault();
+    showFormFunc(false);
 
-    if (title === '' || text === '')
-      return toast.warning('Please fill in the form!');
+    if (!title || !text) return toast.warning('Please fill in the form!');
 
     dispatch(createNote(formData));
     toast.success('Note created!');

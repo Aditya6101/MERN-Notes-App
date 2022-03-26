@@ -60,7 +60,7 @@ const Dashboard: React.FC = () => {
       </div>
 
       {showAddNote ? (
-        <NoteForm />
+        <NoteForm showFormFunc={setShowAddNote} />
       ) : notes.length > 0 ? (
         <NoteList notes={notes} />
       ) : (
