@@ -11,7 +11,6 @@ import { toast } from 'react-toastify';
 
 const Dashboard: React.FC = () => {
   const [showAddNote, setShowAddNote] = useState(false);
-  const [btnText, setBtnText] = useState('Add Note');
 
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
@@ -22,7 +21,6 @@ const Dashboard: React.FC = () => {
   );
 
   const handleClick = () => {
-    setBtnText(showAddNote ? 'Add Note' : 'View Notes');
     setShowAddNote((prev) => !prev);
   };
 
@@ -55,7 +53,7 @@ const Dashboard: React.FC = () => {
           className="w-full py-1 mt-4 text-base font-semibold text-white capitalize bg-black rounded-md font-lato hover:bg-gray-800"
           onClick={handleClick}
         >
-          {btnText}
+          {showAddNote ? 'View Notes' : 'Add Note'}
         </button>
       </div>
 
