@@ -2,10 +2,6 @@
 
 A simple web application for taking short notes.
 
-## Live Site
-
-https://aditya-mern-notes-app.herokuapp.com
-
 
 ## Tech Stack
 
